@@ -1,38 +1,39 @@
 package com.example.todolistapp
 
-import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.todolistapp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity(), TaskItemClickListener
 {
-
     private lateinit var binding: ActivityMainBinding
-    private lateinit var taskViewModel: TaskViewModel
+    //private lateinit var taskViewModel: TaskViewModel
+    private val taskViewModel: TaskViewModel by viewModels {
+        TaskItemModelFactory((application as TodoApplication).repository)
+    }
 
-
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?)
+    {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        taskViewModel = ViewModelProvider(this).get(TaskViewModel::class.java)
-        binding.newTaskButton.setOnClickListener{
-            NewTaskSheet(null).show(supportFragmentManager,"newTaskTag" )
+        //taskViewModel = ViewModelProvider(this).get(TaskViewModel::class.java)
 
+        binding.newTaskButton.setOnClickListener {
+            NewTaskSheet(null).show(supportFragmentManager, "newTaskTag")
         }
         setRecyclerView()
     }
 
-    private fun setRecyclerView() {
-       val mainActivity = this
+    private fun setRecyclerView()
+    {
+        val mainActivity = this
         taskViewModel.taskItems.observe(this){
             binding.todoListRecyclerView.apply {
-               layoutManager = LinearLayoutManager(applicationContext)
+                layoutManager = LinearLayoutManager(applicationContext)
                 adapter = TaskItemAdapter(it, mainActivity)
             }
         }
@@ -40,7 +41,7 @@ class MainActivity : AppCompatActivity(), TaskItemClickListener
 
     override fun editTaskItem(taskItem: TaskItem)
     {
-      NewTaskSheet(taskItem).show(supportFragmentManager,"newTaskTag")
+        NewTaskSheet(taskItem).show(supportFragmentManager,"newTaskTag")
     }
 
     override fun completeTaskItem(taskItem: TaskItem)

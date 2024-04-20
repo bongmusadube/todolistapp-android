@@ -9,7 +9,7 @@ import java.time.LocalDate
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
 
-@Entity(tableName = "task_item_table")
+@Entity (tableName = "task_item_table")
 class TaskItem(
     @ColumnInfo(name = "name") var name: String,
     @ColumnInfo(name = "desc") var desc: String,
@@ -26,7 +26,7 @@ class TaskItem(
     fun imageResource(): Int = if(isCompleted()) R.drawable.checked_24 else R.drawable.unchecked_24
     fun imageColor(context: Context): Int = if(isCompleted()) purple(context) else black(context)
 
-    private fun purple(context: Context) = ContextCompat.getColor(context, androidx.appcompat.R.color.material_blue_grey_800)
+    private fun purple(context: Context) = ContextCompat.getColor(context, R.color.purple)
     private fun black(context: Context) = ContextCompat.getColor(context, R.color.black)
 
     companion object {

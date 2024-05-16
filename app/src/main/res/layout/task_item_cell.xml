@@ -38,6 +38,17 @@
             android:layout_marginHorizontal="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/dueDate"
+            android:text="@string/place_holder"
+            style="@style/TextAppearance.AppCompat.Title"
+            android:layout_gravity="center"
+            />
+
+
+        <TextView
+            android:layout_marginHorizontal="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:id="@+id/dueTime"
             android:text="@string/place_holder"
             style="@style/TextAppearance.AppCompat.Title"

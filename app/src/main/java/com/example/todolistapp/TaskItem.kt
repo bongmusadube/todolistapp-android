@@ -6,6 +6,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.time.LocalDate
+import java.time.LocalDateTime
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
 
@@ -14,13 +15,16 @@ class TaskItem(
     @ColumnInfo(name = "name") var name: String,
     @ColumnInfo(name = "desc") var desc: String,
     @ColumnInfo(name = "dueTimeString") var dueTimeString: String?,
+    @ColumnInfo(name = "dueDate") var dueDate: String? = null,
     @ColumnInfo(name = "completedDateString") var completedDateString: String?,
+    //@ColumnInfo(name = "reminderTime") var reminderTime: LocalDateTime? = null,
     @PrimaryKey(autoGenerate = true) var id: Int = 0
 )
 {
 
     private fun completedDate(): LocalDate? = if (completedDateString == null) null else LocalDate.parse(completedDateString, dateFormatter)
     fun dueTime(): LocalTime? = if (dueTimeString == null) null else LocalTime.parse(dueTimeString, timeFormatter)
+    fun dueDate(): LocalDate? = if (dueDate == null) null else LocalDate.parse(dueDate, dateFormatter)
 
     fun isCompleted() = completedDate() != null
     fun imageResource(): Int = if(isCompleted()) R.drawable.checked_24 else R.drawable.unchecked_24

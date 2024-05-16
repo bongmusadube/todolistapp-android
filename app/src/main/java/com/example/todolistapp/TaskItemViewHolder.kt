@@ -13,6 +13,9 @@ class TaskItemViewHolder(
 ): RecyclerView.ViewHolder(binding.root)
 {
     private val timeFormat = DateTimeFormatter.ofPattern("HH:mm")
+    private val dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+
+
 
     fun bindTaskItem(taskItem: TaskItem)
     {
@@ -37,5 +40,16 @@ class TaskItemViewHolder(
             binding.dueTime.text = timeFormat.format(taskItem.dueTime())
         else
             binding.dueTime.text = ""
+
+        if(taskItem.dueDate() != null)
+            binding.dueDate.text = dateFormat.format(taskItem.dueDate())
+        else
+            binding.dueDate.text = ""
+
+
+
+
+
+
     }
 }

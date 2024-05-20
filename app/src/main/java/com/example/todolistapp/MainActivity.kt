@@ -33,10 +33,10 @@ class MainActivity : AppCompatActivity(), TaskItemClickListener
         setContentView(binding.root)
         //taskViewModel = ViewModelProvider(this).get(TaskViewModel::class.java)
 
-        binding.newTaskButton.setOnClickListener {
-            NewTaskSheet(null).show(supportFragmentManager, "newTaskTag")
-        }
-        setRecyclerView()
+//        binding.newTaskButton.setOnClickListener {
+//            NewTaskSheet(null).show(supportFragmentManager, "newTaskTag")
+//        }
+//        setRecyclerView()
 
         // Set up bottom navigation
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
@@ -60,16 +60,16 @@ class MainActivity : AppCompatActivity(), TaskItemClickListener
 
     }
 
-    private fun setRecyclerView()
-    {
-        val mainActivity = this
-        taskViewModel.taskItems.observe(this){
-            binding.todoListRecyclerView.apply {
-                layoutManager = LinearLayoutManager(applicationContext)
-                adapter = TaskItemAdapter(it, mainActivity)
-            }
-        }
-    }
+//    private fun setRecyclerView()
+//    {
+//        val mainActivity = this
+//        taskViewModel.taskItems.observe(this){
+//            binding.todoListRecyclerView.apply {
+//                layoutManager = LinearLayoutManager(applicationContext)
+//                adapter = TaskItemAdapter(it, mainActivity)
+//            }
+//        }
+//    }
     private fun replaceFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragmentContainer, fragment)  // Replace with your container's ID
